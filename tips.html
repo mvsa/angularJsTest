@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="helloWorld">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+    <script src="angular.js"></script>
+    <script>
+    
+    </script>
+</head>
+<body>
+ 
+</body>
+</html>
+
+Modelo de modulo = 
+
+angular.module("nomedoModulo",[]); dentro das chaves são injetados outros modulos
+
+modelo de controler, localizando o modulo = 
+
+angular.module("nome").controller("nomeDoControler", function($scope){
+    $scope.message = "algo"
+});
+
+--Diretivas -- extensão da linguagem html extendido pelo angular com novos comportamentos
+ng-controler faz o link do controler para uma view(o router tb faz isso)
+<div ng-controller="nomeDoControler">
+    {{message}} ;; {{message + concattenar}}
+</div>
+
+ng-Bind = substitui um elemento por uma expressão == mesma coisa de {{}} porem se der algum erro no corregamento
+e ela tiver com ng bind ela vai imprimir {{asd}} na tela, com o ng bind não
+
+ng-model = vincula uma propriedade ao scope //faz o inverso do ngbind
+
+ng-repeat = permite iteração 
+
+ng-click = atribui com base num click
+
+--evitar ao maximo ler o scope dentro do scopo exe: $scope.nome
+
+ng-disabled = g-disabled= "!contato.nome
+
+ng-options = renderiza opções de select
+ng-options="operadora.codigo as operadora.nome for operadora in operadoras"> // vai puxar so o codigo mas mostra o nome no front
+ngclass ngStyle = aplicar css e estilos dinamicamente
+ngshow, nghide (esses dois aplicam apenas visualmente, um displaynone), ngif(esse remove o elemento da Dom(esse é para performance)) - exibir elemetnos condicionalmente
+
+(ng blur, focus, doubleclick, cut paste)
+
+<tr ng-class="{'selecionado negrito': contato.selecionado} um obj pode ter um identificador string, (entre selecionado e negrito)
+ngInclude = o chromne bloqueia no modo dev
+
+
+
+----
+
+var isContatoSelecionado = contatos.some(function(contato){ //se ao menos um satisfazer volta true
