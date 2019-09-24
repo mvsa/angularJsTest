@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="helloWorld">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
 
-
-    <script src="angular.js"></script>
-    <script>
-    
-    </script>
-</head>
-<body>
- 
-</body>
-</html>
 
 Modelo de modulo = 
 
@@ -56,8 +39,42 @@ ngshow, nghide (esses dois aplicam apenas visualmente, um displaynone), ngif(ess
 <tr ng-class="{'selecionado negrito': contato.selecionado} um obj pode ter um identificador string, (entre selecionado e negrito)
 ngInclude = o chromne bloqueia no modo dev
 
+ngRequired - declara obrigatoriedade de campo
+$valid e $invalid consulta validade de campo
+$pristine(nunca foi tocad) e $dirty(foi tocado) - verifica se um campo ou form  ja foi usado
+ngMinlength e ngMaxlength - define tamanhos maximos e minimos permitidos (ele n vai impedir a digitação, mas sim apontar que o limite foi atingido)
+$error - consulta erros de um campo ou form
+ngPattern - define um regex para validar campo
+ngMessage - switch de mensagem (modulo externo devo importar)
 
+Filtro-trasnforma o resutlado de uma expressão
+cuidado, filtros em tela tem impacto em performance/ o jeito mais perfomatico é aplicar pelo contrler
+(pesquisar: ferramenta de profiling)
 
+uppercase/ lowercase
+date
+com : posso passar parametros para o filtro
+filter - filtra um array com base em criterio |
+orderby-ordena array com base em criterio / orderBy:'-nome'(Desc) orderBy:'+nome'(asc) / existe um 3 parametro que é o reverse
+ele é implicito, se colocar true, vai inverter a ordem  | filter:{nome:busca} | orderBy:'nome':true
+currency - converte um numero para moeda
+number - formata um numero
+limitTo - limita um array ou string
 ----
 
 var isContatoSelecionado = contatos.some(function(contato){ //se ao menos um satisfazer volta true
+
+
+
+
+undefined vira false
+
+
+ 1- //
+ 2- /\d/   - d = digito   
+ 3- /\d{}/   = {} quantidade
+ 4-/\d{4}-\d{4}/ = 9999-9999
+ 5- /^\d{4,5}-\d{4}$/ =   ^onde começa  $onde termina
+ -----------------------------------------------------------
+ $http 
+ permite requisições usando xmlhttprequest (no outro tutorial eles substituem por uma factory)
