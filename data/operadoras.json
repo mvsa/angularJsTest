@@ -1,0 +1,35 @@
+[
+    {
+        "nome": "Oi", 
+        "codigo": 14, 
+        "categoria": "Celular", 
+        "preco": 4
+    },
+    {
+        "nome": "Vivo", 
+        "codigo": 15, 
+        "categoria": "Celular", 
+        "preco": 5
+    }, 
+    {
+        "nome": "Tim", 
+        "codigo": 16, 
+        "categoria": "Celular", 
+        "preco": 2
+    }, 
+    {
+        "nome": "gvt", 
+        "codigo": 17, 
+        "categoria": "Fixo", 
+        "preco": 3
+    },  
+    {
+        "nome": "nextel", 
+        "codigo": 18, 
+        "categoria": "Fixo", 
+        "preco": 5
+    }
+   
+    
+]
+

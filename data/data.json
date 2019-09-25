@@ -1,0 +1,36 @@
+[
+    {
+        "nome": "Marcos", 
+        "telefone": "1212-2323", 
+        "cor": "red", 
+        "data": "2015-04-12T12:53:46.204Z", 
+         "operadora":{
+             "nome": "Oi",
+             "codigo": 14,
+             "categoria":"Celular"
+         }
+    }, 
+    {
+        "nome": "pERO", 
+        "telefone": "1212-2323", 
+        "cor": "blue", 
+        "data": "2015-04-12T12:53:46.204Z", 
+         "operadora":{
+             "nome": "Vivo",
+             "codigo": 15,
+             "categoria":"Celular"
+         }
+    }, 
+    {
+        "nome": "vICTOR",
+        "cor": "green",  
+        "telefone": "1212-2323", 
+        "data": "2015-04-12T12:53:46.204Z", 
+         "operadora":{
+             "nome": "Tim",
+             "codigo": 16,
+             "categoria":"Celular"
+         }
+    }
+    
+]

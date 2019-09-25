@@ -1,4 +1,4 @@
-
+====controler - service- factory
 
 Modelo de modulo = 
 
@@ -78,3 +78,46 @@ undefined vira false
  -----------------------------------------------------------
  $http 
  permite requisições usando xmlhttprequest (no outro tutorial eles substituem por uma factory)
+
+-----------------------------------------------------------
+
+serviços:
+
+
+factory- função fabrica
+//faço invocação e tenho objeto de retorno, equivale a:
+var criarPessoa = function (nome,idade){
+    return{
+        nome:nome
+        idade:idade
+    }
+}
+var maria =  criarPessoa('maria',23);
+
+service-
+//usa função contrutora
+equivale a:
+var Pessoa = function (nome,idade){
+    this.nome = nome;
+    this.idade = idade;
+}
+var carlos = new Pessoa('carlos', 24);
+
+
+value - registro de objetos de configuração
+por exemplo, urls fixas de chamada api, etc
+
+constant - mesma implementação de value, a diferença é que ele pode ser
+injetado em serviços do tipo provider
+
+
+
+provider - servico que da origem a todos os outros, da a habilidade congfigura-los, passando parametros
+serialGenerator
+
+config - configurar serviços do tipo provider/ inicialização, permite passar parametros
+-----------------------------------------------------------
+
+Filtros: transformam o resultado de expressão (ordenar, converter, etc)
+{{contato.nome | name | ellipsis}} ele stacka os filtros, os mais a direita ja recebem o resultado
+dos filtros ja aplicados a esqurda

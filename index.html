@@ -8,97 +8,29 @@
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular/angular-messages.js"></script>
     <script src="lib/angular/angular-locale_pt-br.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/configValue.js"></script>
+    <script src="js/controllers/listaTelefonicaCtrl.js"></script>
+    <script src="js/services/contatosApiService.js"></script>
+    <script src="js/services/operadorasApiService.js"></script>
+    <script src="js/services/serialGeneratorService.js"></script>
+    <script src="js/config/serialGeneratorConfig.js"></script>
+    <script src="js/filters/nameFilter.js"></script>
+    <script src="js/filters/ellipsisFilter.js"></script>
     
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
-    <style>
-            .jumbotron{
-                width: 650px;
-                text-align:center;
-                margin-top: 20px;
-                margin-right: auto;
-                margin-left: auto;
-            }
+    <link rel="stylesheet" type="text/css" href="css/app.css">
 
-            .table{
-                margin-top: 20px;
-            }
-            .form-control{
-                margin-bottom: 5px;
-            }
-
-            .selecionado{
-                background-color: yellow;
-            }
-
-            .negrito{
-                font-weight: bold;
-            }
-        
-    </style> 
-
-    <script>
-        angular.module("listaTelefonica",["ngMessages"]);
-        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope,$filter,$http){
-            $scope.app = "Lista Telefonica";
-            $scope.contatosOld = [
-                {nome: $filter('uppercase')("Pedro"), telefone:"3423423", data:new Date()},
-                {nome:"Ana", telefone:"633423",cor: "yellow"},
-                {nome:"joao", telefone:"3423423", cor: "green"},
-            ];
-            //So preciso criar as coisas atreladas a $scope se eu for mostrar/usar na view
-            var carregarContatos = function (){
-                $http.get('data.json').then(function(data,status){
-                   $scope.php = data;
-                });
-            };
-
-
-            $scope.operadoras = [
-                {nome:"Oi", codigo:14, categoria:"Celular", preco: 4},
-                {nome:"Vivo", codigo:15, categoria:"Celular", preco: 5},
-                {nome:"Tim", codigo:16, categoria:"Celular", preco: 2},
-                {nome:"gvt", codigo:17, categoria:"Fixo", preco: 3},
-                {nome:"Net", codigo:18, categoria:"Fixo", preco: 1},
-            ];
-
-            $scope.adicionarContato = function(contato){
-                $scope.contatos.push(contato);
-                delete $scope.contato;
-                $scope.contatoForm.$setPristine();
-              
-            };
-
-            $scope.apagarContatos = function (contatos){
-             $scope.contatos =  contatos.filter(function(contato){
-                      if (!contato.selecionado) return contato;
-                });
-            };
-            //essa função n está otimizada, prejudiva perfomance
-            $scope.isContatoSelecionado = function(contatos){
-                return contatos.some(function(contato){
-                    return contato.selecionado;
-                });
-            }
-
-            $scope.ordernarPor = function (campo){
-                $scope.criterio = campo;
-                $scope.direcaoOrd = !$scope.direcaoOrd; //a primeira vez que ele é setado no codigo ele vem como undefined
-                                                      // que por padrão é false   
-            }
-
-            carregarContatos();
-        });
-        
-
-    </script>
 </head>
 <body>
     <div class="jumbotron">
         <h3>{{app}}</h3>
+        {{message}}
         <input class="form-control" type="text" ng-model="busca"/>
         <table ng-show="contatos.length > 0" class="table ">
             <tr>
                  <th></th>   
+                 <th>Serial</th>
                 <th><a href="" ng-click="ordernarPor('nome')">Nome</a></th>
                 <th><a href="" ng-click="ordernarPor('telefone')">Telefone</a></th>
                 <th>Operadora</th>
@@ -108,7 +40,8 @@
             </tr>
             <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:busca} | orderBy:criterio:direcaoOrd">
                 <td><input type="checkbox" ng-model="contato.selecionado"/></td>
-                <td>{{contato.nome}}</td>
+                <td>{{contato.serial}}</td>
+                <td>{{contato.nome | name | ellipsis:5}}</td>
                 <td>{{contato.telefone| limitTo:4}}</td>
                 <td>{{contato.operadora.nome | lowercase}}</td>
                 <td><div style="width:20px;height: 20px;" ng-style="{'background-color':contato.cor}" ></div></td>
@@ -143,7 +76,7 @@
         <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-show="isContatoSelecionado(contatos)" >Apagar</button>
     </div>
     
-    <div ng-include="'footer.html'"></div> 
+    <div ng-include="'partials/footer.html'"></div> 
 
 
 </body>
