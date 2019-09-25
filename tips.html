@@ -121,3 +121,11 @@ config - configurar serviços do tipo provider/ inicialização, permite passar 
 Filtros: transformam o resultado de expressão (ordenar, converter, etc)
 {{contato.nome | name | ellipsis}} ele stacka os filtros, os mais a direita ja recebem o resultado
 dos filtros ja aplicados a esqurda
+
+
+-----------------------------------------------------------
+//rota
+//app.use('/api', require('./src/routes'));  // a rota deve ter um api/algo.html
+app.use(express.static('angularJs'));
+
+app.listen(3001);
