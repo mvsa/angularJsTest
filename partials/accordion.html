@@ -1,0 +1,13 @@
+<div class="ui-accordion-title" ng-click="open()" >{{title}}</div>
+<div class="ui-accordion-content" ng-show="isOpened" ng-transclude></div>
+
+<!--Evitar ler escopo diretamente do controler
+Evitar escrever no escopo pela view
+Exemplo:
+
+
+<div class="ui-accordion-title" ng-click="isOpened=!isOpened" >{{title}}</div>
+<div class="ui-accordion-content" ng-show="isOpened" ng-transclude></div>
+
+
+-->

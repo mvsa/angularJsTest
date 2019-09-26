@@ -17,15 +17,34 @@
     <script src="js/config/serialGeneratorConfig.js"></script>
     <script src="js/filters/nameFilter.js"></script>
     <script src="js/filters/ellipsisFilter.js"></script>
+    <script src="js/directives/uiAlertDirective.js"></script>
+    <script src="js/directives/uiDateDirective.js"></script>
+    <script src="js/directives/uiAccordionDirective.js"></script>
     
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link rel="stylesheet" type="text/css" href="css/ui.css">
 
 </head>
 <body>
     <div class="jumbotron">
+        <ui-accordions>
+            <ui-accordion title="Accordion 1" >
+                Conteudo definido atraves de transclude 1
+            </ui-accordion>
+
+            <ui-accordion title="Accordion 2" >
+                Conteudo definido atraves de transclude 2
+            </ui-accordion>
+
+        </ui-accordions>  
+          
         <h3>{{app}}</h3>
-        {{message}}
+
+        <div ui-alert title="Aconteceu um problemasss" message="message">
+            O que ta aqui sai por conta do trasclude{{app}}
+        </div>  <!--Esse "message" foi definido no listaTelefonicaCtrl-->
+
         <input class="form-control" type="text" ng-model="busca"/>
         <table ng-show="contatos.length > 0" class="table ">
             <tr>
@@ -53,6 +72,7 @@
         <form name="contatoForm">
             <input class="form-control" type="text" ng-model="contato.nome" placeholder="Nome" name="nome" ng-minlength="10" ng-required="true"/>
             <input class="form-control" type="text" ng-model = "contato.telefone" placeholder="Telefone" name="telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/" />
+            <input class="form-control" type="text" ng-model = "contato.data" name="data" placeholder="Data" ui-date>  
             <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome + ' ('+ (operadora.preco | currency) +' )' group by operadora.categoria for operadora in operadoras">
                 <option value="">Selecione uma Operadora</option>   
             </select>

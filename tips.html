@@ -118,14 +118,54 @@ serialGenerator
 config - configurar serviços do tipo provider/ inicialização, permite passar parametros
 -----------------------------------------------------------
 
-Filtros: transformam o resultado de expressão (ordenar, converter, etc)
+Filtros: transformam o resultado de expressão (ordenar, converter, etc)  (efeito mascara, so muda a visualização, mas dados permanecem inalterados)
 {{contato.nome | name | ellipsis}} ele stacka os filtros, os mais a direita ja recebem o resultado
 dos filtros ja aplicados a esqurda
 
-
 -----------------------------------------------------------
-//rota
-//app.use('/api', require('./src/routes'));  // a rota deve ter um api/algo.html
-app.use(express.static('angularJs'));
+Diretivas, criação: 
+angular.module('nomeDoModulo').directive('nomeDaDiretiva', function(){
+    return{
+        //Propriedades da Diretiva
+    };
+});
 
-app.listen(3001);
+Propriedades:
+
+Template e templateUrl
+especifica o template ou a url do template que deverá ser incluido dentro do elemento    | age similar ao ng-include
+
+Replace:
+restrict: restringe o modo de utilização da diretiva, aplicada em atributo, elemento, classe, etc
+tipos de restrição:
+A - Diretiva restrita a atributo do elemento       <div ui-alert></div>
+E - ao elemento        <ui-alert></ui-alert>
+C - a Classe do elemento
+M - Ao comentario do elemento
+
+
+Scope: 
+uiAlertDirective.js
+por padrão ela compartilha o escopo a qual foi aplicada, com essa propr, posso extender um escopo
+aumentando seu potencial de reuso, isolando ele.
+consido usar então variaveis inseridas em diferentes contextos, não apenas do escopo pai.
+Deixo de acessar o escopo externo
+
+@ vincula o valor do atributo diretamente a uma proriedade do scope da diretiva
+= cria um vinculo bi-direcional entre uma propriedade do scope do template a uma propriedade do scope da diretiva
+
+Transclude: Encapsula elementos dentro de uma diretiva, criando um scope não isolado
+consigo ter acesso ao escopo geral por exemplo
+
+
+Escrever {{$id}} na pagina para saber em qual lvl de escopo ela está
+
+---Diretivas para mascaras de campo de entrada. (Formatar entrada de data, cpf, etc)
+isso é diferente de filtro, pois filtro atua transformando o resutlado de uma expressão, e n da pra aplicar diretamento num ng model
+
+link: executado depois do template ter sido compilado, pode er usado para interagir com a Dom, tratando eventos ou definindo
+comportamento associado com a logica da diretiva
+uiDateDirective
+
+
+---controller - permite a definição de uma api que pode ser compartilhado com outras Diretivas
