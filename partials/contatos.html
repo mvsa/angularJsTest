@@ -1,0 +1,44 @@
+<div class="jumbotron">
+    <ui-accordions>
+        <ui-accordion title="Accordion 1" >
+            Conteudo definido atraves de transclude 1
+        </ui-accordion>
+
+        <ui-accordion title="Accordion 2" >
+            Conteudo definido atraves de transclude 2
+        </ui-accordion>
+
+    </ui-accordions>  
+      
+    <h3>{{app}}</h3>
+
+    <div ui-alert title="Aconteceu um problemasss" message="message">
+        O que ta aqui sai por conta do trasclude{{app}}
+    </div>  <!--Esse "message" foi definido no listaTelefonicaCtrl-->
+
+    <input class="form-control" type="text" ng-model="busca"/>
+    <table ng-show="contatos.length > 0" class="table ">
+        <tr>
+             <th></th>   
+             <th>Serial</th>
+            <th><a href="" ng-click="ordernarPor('nome')">Nome</a></th>
+            <th><a href="" ng-click="ordernarPor('telefone')">Telefone</a></th>
+            <th>Operadora</th>
+            <th></th>
+            <th>Data</th>
+            
+        </tr>
+        <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:busca} | orderBy:criterio:direcaoOrd">
+            <td><input type="checkbox" ng-model="contato.selecionado"/></td>
+            <td>{{contato.serial}}</td>
+            <td><a href="#/detalhesContato/{{contato.id}}">{{contato.nome | name | ellipsis:5}}</a></td>
+            <td>{{contato.telefone| limitTo:4}}</td>
+            <td>{{contato.operadora.nome | lowercase}}</td>
+            <td><div style="width:20px;height: 20px;" ng-style="{'background-color':contato.cor}" ></div></td>
+            <td>{{contato.data | date:'MMM EEEE dd/MM/yyyy HH:mm'}}</td>
+        </tr>
+    </table>
+    <hr/>
+    <a class="btn btn-primary btn-block" href="#/novoContato">Novo Contato</a>
+    <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-show="isContatoSelecionado(contatos)" >Apagar</button>
+</div>

@@ -1,26 +1,13 @@
 
-        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope,$filter,contatosAPI,operadorasAPI,serialGenerator){
+        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope,$filter,contatos,operadoras,serialGenerator){
             $scope.app = "Lista Telefonica";
-            $scope.operadoras = [];
-            $scope.contatos = [];
+            $scope.operadoras = operadoras.data;
+            $scope.contatos = contatos.data;
 
             //So preciso criar as coisas atreladas a $scope se eu for mostrar/usar na view
-            var carregarContatos = function (){
-                contatosAPI.getContatos().then(function(data,status){
-                    $scope.contatos = data.data;
-                }).catch(function(data,status){
-                    $scope.message = "Erro de carregamento: " + data.status;
-                });
-            };
+            //var carregarContatos = function (){};
 
-            var carregarOperadoras = function(){
-               operadorasAPI.getOperadoras().then(function(data,status){
-                    $scope.operadoras = data.data;
-                }).catch(function(data,status){
-                    $scope.message = "Erro de carregamento: " + data.status;
-                });
-            };
-
+  
 
             $scope.adicionarContato = function(contato){   
                 contato.serial = serialGenerator.generate();
@@ -58,7 +45,7 @@
                                                       // que por padr�o � false   
             }
 
-            carregarContatos();
-            carregarOperadoras();
+            
+       
         });
         
