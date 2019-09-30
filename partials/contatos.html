@@ -16,7 +16,7 @@
         O que ta aqui sai por conta do trasclude{{app}}
     </div>  <!--Esse "message" foi definido no listaTelefonicaCtrl-->
 
-    <input class="form-control" type="text" ng-model="busca"/>
+    <input class="form-control" type="text" ng-model="busca"  ng-model-options="{updateOn: 'default blur', debounce:{default:500, blur: 0}}" />
     <table ng-show="contatos.length > 0" class="table ">
         <tr>
              <th></th>   
@@ -28,17 +28,24 @@
             <th>Data</th>
             
         </tr>
-        <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:busca} | orderBy:criterio:direcaoOrd">
-            <td><input type="checkbox" ng-model="contato.selecionado"/></td>
+        <tr ng-class="{'selecionado negrito': contato.selecionado}" ng-repeat="contato in contatos | filter:{nome:busca} | orderBy:criterio:direcaoOrd track by contato.id">
+            <td><input type="checkbox" ng-model="contato.selecionado"  ng-click="verificarContatoSelecionado(contatos)"   /></td>
             <td>{{contato.serial}}</td>
-            <td><a href="#/detalhesContato/{{contato.id}}">{{contato.nome | name | ellipsis:5}}</a></td>
+            <td><a href="#/detalhesContato/{{contato.id}}">{{::contato.nome | name | ellipsis:5}}</a></td>
             <td>{{contato.telefone| limitTo:4}}</td>
-            <td>{{contato.operadora.nome | lowercase}}</td>
+            <td>{{::contato.operadora.nome | lowercase}}</td>
             <td><div style="width:20px;height: 20px;" ng-style="{'background-color':contato.cor}" ></div></td>
-            <td>{{contato.data | date:'MMM EEEE dd/MM/yyyy HH:mm'}}</td>
+            <td>{{::contato.data | date:'MMM EEEE dd/MM/yyyy HH:mm'}}</td>
         </tr>
     </table>
     <hr/>
     <a class="btn btn-primary btn-block" href="#/novoContato">Novo Contato</a>
-    <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-show="isContatoSelecionado(contatos)" >Apagar</button>
+    <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-show="hasContatoSelecionado" >Apagar</button>
 </div>
+
+<!--  antigo
+     <td><input type="checkbox" ng-model="contato.selecionado"   /></td>
+    <button class="btn btn-danger btn-block" ng-click="apagarContatos(contatos)" ng-show="isContatoSelecionado(contatos)" >Apagar</button>
+
+
+-->

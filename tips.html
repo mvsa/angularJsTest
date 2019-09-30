@@ -19,6 +19,7 @@ ng-controler faz o link do controler para uma view(o router tb faz isso)
 ng-Bind = substitui um elemento por uma expressão == mesma coisa de {{}} porem se der algum erro no corregamento
 e ela tiver com ng bind ela vai imprimir {{asd}} na tela, com o ng bind não
 
+ng-src
 ng-model = vincula uma propriedade ao scope //faz o inverso do ngbind
 
 ng-repeat = permite iteração 
@@ -28,6 +29,9 @@ ng-click = atribui com base num click
 --evitar ao maximo ler o scope dentro do scopo exe: $scope.nome
 
 ng-disabled = g-disabled= "!contato.nome
+
+
+$scope.contatos = angular.copy($scope.contatos)
 
 ng-options = renderiza opções de select
 ng-options="operadora.codigo as operadora.nome for operadora in operadoras"> // vai puxar so o codigo mas mostra o nome no front
@@ -182,3 +186,68 @@ ngRoute -
 $routeProvider - serve para configurar o serviço de roteamento, configurando rotas especificas e padrões
 when(path,route) // otherwise(path)
 resolver dependencias  
+
+-----------------------------------------------------------
+Interceptors:
+permite a interceptação de  requisições e respostas $http
+para pegar precisa configurar o interceptor(interceptorConfig)
+
+error interceptor: interceptos/errorInterceptor
+loading Interceptor:  interceptor/loadingInterceptor
+
+
+-----------------------------------------------------------
+performance - 
+
+angular batarang pra ver perfomance
+
+
+Principais causadores de falta de perfomance:
+-Excesso de interação com a DOm   (varios ng repeats com muitos elementos de uma vez, etc)
+-Processamento de coisas de desnecessarias
+
+-Evitar processamentos direto na view, {{(valor *2)}}     - 
+                                       {{calcular(valor)}}  - 
+certo- fazer o processamento na inicialização no back do angular, e ja passar o dado formatado pra view (em uma nova var)
+-fazer uma func calcular imposto, e uma calcular impostos, que roda essa função em todos os users
+dai, faz uma função init pra rodar a calcular impostos:
+                            var init = function (){
+                                calcularImpostos($scope.contatos)
+                            }
+                            init();
+-cuidado com expressions que usem funções complexas
+
+
+-Opte pelo one-time bind sempre que fizer sentido:
+{{noormal}} = {{::oneTime}}
+Ao fazer isso, depois que ele carregar, tiro o watcher e o angular n se preocupa mais com ele, 
+apos atualizar a pagina o watcher dele n roda / usar em valores que n mudam(É o caso das informações da
+tabela de contatos)
+
+
+Mude o comportamento padrão com ng-model-options
+(o comportamento do ng-model de pesquisar não é muito bom quando existem muitos itens na lista)
+alterei no input de pesqusisa contatos.html
+
+updateOn blur
+debounce {espere x segundos para rodar}
+
+quando usando ng-repeat e ng-options usar track by
+
+
+Analise o impacto de aplicar os filtros diretamente na view (feito o anterior que é melhor aplicar nos controlers
+e passar o resultado em uma nova variavel)
+no controler adicionar $filter como dependencia:
+$scope.app = $filter('upper')('Lista');
+
+
+Pense bem antes de usar ng-if(interage com a dom) e ng-show(manipula propriedades)
+quanto menos watchers melhor
+if (menos waacher mais caro)
+com show as coisas são carregadas mesmo que n vão aparecer
+--usar ng-if com ng-src
+
+
+
+
+

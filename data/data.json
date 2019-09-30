@@ -1,5 +1,5 @@
 [
-    {
+    {   "id": 3,
         "nome": "Marcos", 
         "telefone": "1212-2323", 
         "cor": "red", 
@@ -10,7 +10,8 @@
              "categoria":"Celular"
          }
     }, 
-    {
+    {   
+        "id": 1,
         "nome": "pERO", 
         "telefone": "1212-2323", 
         "cor": "blue", 

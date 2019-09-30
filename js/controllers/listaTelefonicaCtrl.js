@@ -31,13 +31,25 @@
              $scope.contatos =  contatos.filter(function(contato){
                       if (!contato.selecionado) return contato;
                 });
+                $scope.verificarContatoSelecionado($scope.contatos);
+
             };
             //essa fun��o n est� otimizada, prejudiva perfomance
-            $scope.isContatoSelecionado = function(contatos){
-                return contatos.some(function(contato){
+           // $scope.isContatoSelecionado = function(contatos){
+           //     return contatos.some(function(contato){
+           //         return contato.selecionado;
+           //     });
+           // }
+
+
+            
+            $scope.verificarContatoSelecionado = function(contatos){
+                $scope.hasContatoSelecionado = contatos.some(function(contato){
                     return contato.selecionado;
                 });
             }
+
+
 
             $scope.ordernarPor = function (campo){
                 $scope.criterio = campo;
